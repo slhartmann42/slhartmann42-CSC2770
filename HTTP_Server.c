@@ -9,7 +9,17 @@
 
 void *connection_handler(void *socket_desc) {
     int sock = *(int*)socket_desc;
+    char buffer[1024] = {0};
+    char method[16];
+    char url[1024];
+    char protocol[160];
     char *hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 12\n\nHello, world!";
+    char response[1024];
+    read(sock,buffer,1024);
+    sscanf(buffer,"%s",method);
+    sscanf(buffer,"%s",url):
+    sscanf(buffer,"%s",protocol);
+    printf("HTTP Request",%s/n);
     write(sock, hello, strlen(hello));
     printf("Response sent\n");
     close(sock);
