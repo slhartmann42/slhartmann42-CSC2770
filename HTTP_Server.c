@@ -17,9 +17,10 @@ void *connection_handler(void *socket_desc) {
     char response[1024];
     read(sock,buffer,1024);
     sscanf(buffer,"%s",method);
-    sscanf(buffer,"%s",url):
+    sscanf(buffer,"%s",url);
     sscanf(buffer,"%s",protocol);
-    printf(hello)
+    sprintf(hello,hello,method,url,protocol);
+    printf(hello,method,url,protocol);
     write(sock, hello, strlen(hello));
     printf("Response sent\n");
     close(sock);
