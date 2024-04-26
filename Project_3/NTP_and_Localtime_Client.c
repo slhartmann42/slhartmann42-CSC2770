@@ -39,8 +39,18 @@ int main() {
     int sockfd, n;
     struct sockaddr_in serv_addr;
     ntp_packet packet;
-    time_t current_time;
+    time_t current_time2;
     struct tm *local_time;
+
+    // Get current time
+    current_time2 = time(NULL);
+
+    // Convert to local time
+    local_time = localtime(&current_time2);
+
+    // Print local time
+    printf("Local time: %s", asctime(local_time));
+    printf("\n\n");
 
     sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (sockfd < 0)
@@ -49,7 +59,7 @@ int main() {
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(NTP_PORT);
-    if (inet_pton(AF_INET, NTP_SERVER, &serv_addr.sin_addr) <= 0)
+    if (inet_pton(AF_INET, NTP_SERVER, &serv_addr.sin_addr) < 0)
         error("ERROR invalid address");
 
     memset(&packet, 0, sizeof(packet));
@@ -66,19 +76,19 @@ int main() {
 
     time_t current_time = (ntohl(packet.trans_ts_sec) - NTP_TIMESTAMP_DELTA);
     printf("NTP time: %s", ctime(&current_time));
-    printf("\n\n")
+    printf("\n\n");
 
     // Get current time
-    current_time = time(NULL);
+    current_time2 = time(NULL);
 
     // Convert to local time
-    local_time = localtime(&current_time);
+    local_time = localtime(&current_time2);
 
     // Print local time
     printf("Local time: %s", asctime(local_time));
     printf("\n\n");
-    int tdiff = asctime(local_time) - ctime(&current_time);
-    printf("Differene between local and NTP time: %s \n\n",tdiff);
+    double tdiff = difftime(mktime(local_time), current_time);
+    printf("Differene between local and NTP time: %f \n\n",tdiff);
 
     return 0;
 }
