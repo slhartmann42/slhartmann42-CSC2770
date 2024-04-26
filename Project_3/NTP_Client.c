@@ -47,7 +47,7 @@ int main() {
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(NTP_PORT);
-    if (inet_pton(AF_INET, NTP_SERVER, &serv_addr.sin_addr) <= 0)
+    if (inet_pton(AF_INET, NTP_SERVER, &serv_addr.sin_addr) < 0)
         error("ERROR invalid address");
 
     memset(&packet, 0, sizeof(packet));

@@ -51,7 +51,7 @@ int main() {
     // Print local time
     printf("Local time: %s", asctime(local_time));
     printf("\n\n");
-    
+
     sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (sockfd < 0)
         error("ERROR opening socket");
@@ -59,7 +59,7 @@ int main() {
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(NTP_PORT);
-    if (inet_pton(AF_INET, NTP_SERVER, &serv_addr.sin_addr) <= 0)
+    if (inet_pton(AF_INET, NTP_SERVER, &serv_addr.sin_addr) < 0)
         error("ERROR invalid address");
 
     memset(&packet, 0, sizeof(packet));
@@ -87,8 +87,8 @@ int main() {
     // Print local time
     printf("Local time: %s", asctime(local_time));
     printf("\n\n");
-    double tdiff = difftime(local_time,&current_time);
-    printf("Differene between local and NTP time: %d \n\n",tdiff);
+    double tdiff = difftime(mktime(local_time), current_time);
+    printf("Differene between local and NTP time: %f \n\n",tdiff);
 
     return 0;
 }
