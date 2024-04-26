@@ -39,7 +39,7 @@ int main() {
     int sockfd, n;
     struct sockaddr_in serv_addr;
     ntp_packet packet;
-    time_t current_time;
+    time_t current_time2;
     struct tm *local_time;
 
     sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -69,10 +69,10 @@ int main() {
     printf("\n\n")
 
     // Get current time
-    current_time = time(NULL);
+    current_time2 = time(NULL);
 
     // Convert to local time
-    local_time = localtime(&current_time);
+    local_time = localtime(&current_time2);
 
     // Print local time
     printf("Local time: %s", asctime(local_time));
