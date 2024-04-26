@@ -71,5 +71,6 @@ int main() {
     }
 
     printf("Total number of calculations completed by all threads %d", calculationCount);
+    printf("\n");
     pthread_mutex_destroy(&countMutex); //destroy mutex
 }
