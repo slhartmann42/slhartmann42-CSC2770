@@ -1,14 +1,14 @@
-CC =gcc
-CFLAGS =-Wall -pthread
+CC = gcc
+CFLAGS = -Wall -pthread
 
-SRCS =ThreadedMatrixMultiplication.c
-OBJS =$(SRCS:.c=.o)
-TARGET =ThreadedMatrixMultiplication
+SRCS = ThreadedMatrixMultiply.c
+OBJS = $(SRCS:.c=.o)
+TARGET = ThreadedMatrixMultiply
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
