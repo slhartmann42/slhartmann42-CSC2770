@@ -16,7 +16,7 @@ void *connection_handler(void *socket_desc) {
     char response[2048];
     char *hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 12\nMethod: %s \nURL: %s \nProtocol: %s \n\nHello, world!\n\n";
     read(sock,buffer,1024);
-    sscanf(buffer,"%lds %s %s %s",method,url,protocol);
+    sscanf(buffer,"%s %s %s",method,url,protocol);
     sprintf(response,hello,method,url,protocol);
     hello = response;
     printf(hello,method,url,protocol);
