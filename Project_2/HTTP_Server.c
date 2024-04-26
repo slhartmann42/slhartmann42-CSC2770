@@ -13,12 +13,14 @@ void *connection_handler(void *socket_desc) {
     char method[16];
     char url[1024];
     char protocol[16];
+    char response[2048];
     char *hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 12\nMethod: %s \nURL: %s \nProtocol: %s \n\nHello, world!";
     read(sock,buffer,1024);
     sscanf(buffer,"%s",method);
     sscanf(buffer,"%s",url);
     sscanf(buffer,"%s",protocol);
-    sprintf(hello,hello,method,url,protocol);
+    sprintf(response,hello,method,url,protocol);
+    hello = response;
     printf(hello,method,url,protocol);
     write(sock, hello, strlen(hello));
     printf("Response sent\n");
