@@ -12,9 +12,8 @@ void *connection_handler(void *socket_desc) {
     char buffer[1024] = {0};
     char method[16];
     char url[1024];
-    char protocol[160];
+    char protocol[16];
     char *hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 12\nMethod: %s \nURL: %s \nProtocol: %s \n\nHello, world!";
-    char response[1024];
     read(sock,buffer,1024);
     sscanf(buffer,"%s",method);
     sscanf(buffer,"%s",url);
