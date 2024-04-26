@@ -42,6 +42,16 @@ int main() {
     time_t current_time2;
     struct tm *local_time;
 
+    // Get current time
+    current_time2 = time(NULL);
+
+    // Convert to local time
+    local_time = localtime(&current_time2);
+
+    // Print local time
+    printf("Local time: %s", asctime(local_time));
+    printf("\n\n");
+    
     sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (sockfd < 0)
         error("ERROR opening socket");
@@ -77,7 +87,7 @@ int main() {
     // Print local time
     printf("Local time: %s", asctime(local_time));
     printf("\n\n");
-    int tdiff = asctime(local_time) - ctime(&current_time);
+    double tdiff = difftime(local_time,&current_time);
     printf("Differene between local and NTP time: %d \n\n",tdiff);
 
     return 0;
