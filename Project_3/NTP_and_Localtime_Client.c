@@ -66,7 +66,7 @@ int main() {
 
     time_t current_time = (ntohl(packet.trans_ts_sec) - NTP_TIMESTAMP_DELTA);
     printf("NTP time: %s", ctime(&current_time));
-    printf("\n\n")
+    printf("\n\n");
 
     // Get current time
     current_time2 = time(NULL);
@@ -78,7 +78,7 @@ int main() {
     printf("Local time: %s", asctime(local_time));
     printf("\n\n");
     int tdiff = asctime(local_time) - ctime(&current_time);
-    printf("Differene between local and NTP time: %s \n\n",tdiff);
+    printf("Differene between local and NTP time: %d \n\n",tdiff);
 
     return 0;
 }
